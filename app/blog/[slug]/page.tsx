@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Clock, Calendar, Tag } from 'lucide-react';
 import { blogPosts } from '@/app/data/blogPosts';
+import Image from 'next/image';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -70,12 +71,25 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="max-w-3xl mx-auto"
-          >
+          > 
+            {/* IMAGE SECTION */}
+            {post.image && (
+              <div className="mb-8">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  width={800}
+                  height={400}
+                  className="rounded-lg shadow-lg object-cover w-full"
+                />
+              </div>
+            )}
+
             <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
-  <div className="prose prose-lg dark:prose-invert max-w-none">
-    <p className="text-xl text-muted-foreground mb-8">
-      {post.excerpt}
-    </p>
+              <div className="prose prose-lg dark:prose-invert max-w-none">
+                <p className="text-xl text-muted-foreground mb-8">
+                  {post.excerpt}
+                </p>
 
     {post.content.split('\n\n').map((paragraph, index) => {
       const trimmed = paragraph.trim();
