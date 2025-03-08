@@ -26,7 +26,7 @@ export default function BlogPage() {
               transition={{ duration: 0.5 }}
               className="max-w-3xl mx-auto text-center"
             >
-              <h1 className="text-4xl font-bold mb-4">KidneyScan AI Blog</h1>
+              <h1 className="text-4xl font-bold mb-4">KidneyScan AI Blogs</h1>
               <p className="text-xl opacity-90">
                 Stay informed about kidney health, technology, and breakthrough research
               </p>

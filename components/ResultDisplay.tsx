@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -23,9 +24,21 @@ const getSurgeryRecommendation = (largestSize: number) => {
 
 export default function ResultDisplay() {
   const searchParams = useSearchParams();
+  const [image, setImage] = useState<string | null>(null);
 
-  // Retrieve image URL
-  const imageUrl = searchParams.get("predictedImageUrl") || "/placeholder.svg?height=300&width=400";
+  // Fetch image from localStorage
+  useEffect(() => {
+    const storedImage = localStorage.getItem("predictedImageBase64");
+    if (storedImage) {
+      setImage(storedImage);
+    } else {
+      console.error("No predicted image found in localStorage");
+    }
+  }, []);
+
+  const imageUrl = image ? `data:image/jpeg;base64,${image}` : "/placeholder.svg";
+  
+
 
   // Extract detected stones
   const stones = [];

@@ -40,7 +40,7 @@ export default function Header({ className }: HeaderProps) {
           </li>
           <li>
             <Link href="/blog" className="hover:text-secondary transition-colors">
-              Blog
+              Blogs
             </Link>
           </li>
           <li>

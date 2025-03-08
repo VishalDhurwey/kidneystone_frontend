@@ -52,11 +52,15 @@ export default function ImageUpload() {
       });
 
       if (response.data.status === "success") {
-        const { predicted_image_url, detections, surgerySuggestion } = response.data;
+        const { predicted_image, detections, surgerySuggestion } = response.data;
 
+        // ✅ Store the Base64 image in `localStorage` (prevents URL truncation)
+        localStorage.setItem("predictedImageBase64", predicted_image);
+        // console.log(localStorage.getItem("predictedImageBase64"));
+
+        // ✅ Construct URL with only small-sized parameters
         const searchParams = new URLSearchParams({
-          predictedImageUrl: predicted_image_url || '',
-          surgerySuggestion
+          surgerySuggestion,
         });
 
         detections.forEach((stone: any, index: number) => {
@@ -65,6 +69,7 @@ export default function ImageUpload() {
           searchParams.append(`stone_${index + 1}_severity`, stone.severity);
         });
 
+        // ✅ Redirect without long Base64 string in URL
         router.push(`/results?${searchParams.toString()}`);
       } else {
         setError(response.data.error || "An unknown error occurred.");
