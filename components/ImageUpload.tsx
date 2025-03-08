@@ -47,7 +47,7 @@ export default function ImageUpload() {
     formData.append("image", selectedFile);
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/upload", formData, {
+      const response = await axios.post("https://kidneystone-backend.onrender.com/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
