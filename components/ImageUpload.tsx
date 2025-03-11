@@ -17,6 +17,13 @@ export default function ImageUpload() {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setError(null);
+
+    // 🧹 Clear previous result
+    localStorage.removeItem("predictedImageBase64");
+    const url = new URL(window.location.href);
+    url.search = ""; // Clear query params
+    window.history.replaceState({}, document.title, url.toString());
+
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
 
